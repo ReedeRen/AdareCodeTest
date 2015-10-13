@@ -1,0 +1,68 @@
+﻿@model AdareCode.ViewModel.EventSelectViewModel
+
+@{
+    ViewBag.Title = "AttendeeList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Adare Show</h2>
+@using(Html.BeginForm()){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EventId</legend>
+        <div>
+            @Html.LabelFor(model => model.EventListId)
+            @Html.DropDownList("EventListId", string.Empty)
+            @Html.ValidationMessageFor(model => model.EventListId) 
+            <input type="submit" value="Search Attendees" id="search"/>
+        </div>
+    </fieldset>
+    
+    <div id="Attendee">
+         <table>
+            <tr>
+                <th>
+                    @Html.DisplayName("Full Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Email Address")
+                </th>
+                <th>
+                    @Html.DisplayName("Post Code")
+                </th>
+                <th></th>
+            </tr>
+            @if (Model.Attendees != null){
+                 foreach (var item in Model.Attendees) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostCode)
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        jQuery.noConflict();
+
+        var partialview = '@Url.Action("AttendeeView", "Admin", new { })';
+
+        jQuery('#search').click(function () {
+            jQuery('#attendee').load(url);
+        })
+    </script>
+}

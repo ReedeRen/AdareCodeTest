@@ -1,0 +1,51 @@
+﻿@model AdareCode.Models.AdareShow
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>AdareShow</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventTypeId, "Show Type")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EventTypeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.EventTypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventDate)
+        </div>
+        <div>
+            <input type="text" id="datepicker" name="EventDate" />
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+@*    @Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery('#datepicker').datepicker({ dateformat: 'dd-mm-yy', changeYear: true, });
+        })
+    </script>
+}

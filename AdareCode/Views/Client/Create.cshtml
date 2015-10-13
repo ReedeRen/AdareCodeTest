@@ -1,0 +1,73 @@
+﻿@model AdareCode.Models.Client
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Client</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FullName, "Full Name")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FullName)
+            @Html.ValidationMessageFor(model => model.FullName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailAddress, "Email Address")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmailAddress)
+            @Html.ValidationMessageFor(model => model.EmailAddress)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PostCode, "Post Code")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PostCode)
+            @Html.ValidationMessageFor(model => model.PostCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FaxShowId, "Fax Show")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("FaxShowId", String.Empty)
+            @Html.ValidationMessageFor(model => model.FaxShowId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmailShowId, "Email Show")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EmailShowId", String.Empty)
+            @Html.ValidationMessageFor(model => model.EmailShowId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PrintShowId, "Print Show")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("PrintShowId", String.Empty)
+            @Html.ValidationMessageFor(model => model.PrintShowId)
+        </div>
+
+            <div>
+                <input type="submit" value="Create" />
+                @Html.ActionLink("Cancel", "Index", "Home", null, new {@class="button"})
+            </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
